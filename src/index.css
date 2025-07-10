@@ -1,68 +1,93 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*, *::before, *::after{
+  box-sizing: border-box;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  background: linear-gradient(-45deg, #ffe4e1, #ffb7c5, #fddde6, #fff0f5); 
+  /* misty rose, cherry blossom pink, pale rose, lavender blush*/
+  background-size: 400% 400%;
+  animation: sakuraGradientShift 20s ease-in-out infinite;
+  font-family: 'Ms Madi', cursive, sans-serif;
+  text-align: center;
+  scroll-behavior: smooth;
+  color: #36454f; /*charcoal*/
+  text-shadow:
+    -0.5px -0.5px 0 #ffe6ee,
+     0.5px -0.5px 0 #ffe6ee,
+    -0.5px  0.5px 0 #ffe6ee,
+     0.5px  0.5px 0 #ffe6ee;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.dark body {
+  background: linear-gradient(-45deg, #1e1a1d, #2c1f2e, #3b2637, #4b1e2e); 
+  /*black with plum hints, deep eggplant or mulberry, warm dark rosewood, dark burgundy wine*/
+  background-size: 400% 400%;
+  animation: wineGradientShift 20s ease-in-out infinite;
+  color: #d4af7f;
+  text-shadow:
+    -0.5px -0.5px 0 #722f37,
+     0.5px -0.5px 0 #722f37,
+    -0.5px  0.5px 0 #722f37,
+     0.5px  0.5px 0 #722f37;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@keyframes sakuraGradientShift {
+  0% {
+    background-position: 50% 75%;
+  }
+  50% {
+    background-position: 100% 75%;
+  }
+  100% {
+    background-position: 50% 75%;
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@keyframes wineGradientShift {
+  0% {
+    background-position: 50% 75%;
   }
-  a:hover {
-    color: #747bff;
+  50% {
+    background-position: 100% 75%;
   }
-  button {
-    background-color: #f9f9f9;
+  100% {
+    background-position: 50% 75%;
   }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.text-gradient {
+  display: inline-block;
+  background: linear-gradient(to left, #f43f5e 50%, #6b7280 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-background-clip: text;
+  transition: background-position 0.6s ease;
+}
+
+.dark .text-gradient {
+  background: linear-gradient(to left, #fca5a5 50%, #d1d5db 50%);
+}
+
+.text-gradient:hover {
+  background-position: left bottom;
 }
