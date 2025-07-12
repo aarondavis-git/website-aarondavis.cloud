@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import NavigationBar from './components/NavigationBar'
 import './index.css'
+import NavigationBar from './components/NavigationBar'
+
 
 
 import Home from './pages/Home'

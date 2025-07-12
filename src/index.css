@@ -21,7 +21,9 @@ body {
   /* misty rose, cherry blossom pink, pale rose, lavender blush*/
   background-size: 400% 400%;
   animation: sakuraGradientShift 20s ease-in-out infinite;
-  font-family: 'Ms Madi', cursive, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   scroll-behavior: smooth;
   color: #36454f; /*charcoal*/

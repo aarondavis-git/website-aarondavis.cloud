@@ -9,7 +9,7 @@ const Portfolio = () => {
         </h2>
       </section>
 
-      <div className="flex flex-col md:flex-row gap-8 items-stretch text-center">
+      <div className="flex flex-row md:flex-row gap-8 items-stretch text-center">
         {/* Front-end */}
         <div className="container flex-1 aspect-square backdrop-blur-md rounded p-6 flex flex-col justify-center">
           <h2 className="text-xl md:text-2xl font-bold text-rose-700">
@@ -17,6 +17,16 @@ const Portfolio = () => {
           </h2>
           <p className="text-lg md:text-xl font-semibold text-rose-700">
             Front-end Projects
+          </p>
+        </div>
+
+        {/* Back-End */}
+        <div className="container flex-1 aspect-square backdrop-blur-md rounded p-6 flex flex-col justify-center">
+          <h2 className="text-xl md:text-2xl font-bold text-rose-700">
+            {'Back-end'}
+          </h2>
+          <p className="text-lg md:text-xl font-semibold text-rose-700">
+            Data Architecture
           </p>
         </div>
 

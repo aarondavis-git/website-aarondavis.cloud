@@ -26,7 +26,7 @@ const NavigationBar = () => {
           className='navbar-title cursor-pointer'
           type='button'>
           <h1 className='m-0 leading-none'>
-            <span>{'</Aaron>'}</span>
+            <span>Aaron</span>
           </h1>
         </button>
         <ul className="navbar-links flex space-x-6 list-none font-medium">
