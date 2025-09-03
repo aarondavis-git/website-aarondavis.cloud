@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  background: linear-gradient(-45deg, #ffe4e1, #ffb7c5, #fddde6, #fff0f5); 
+  /* misty rose, cherry blossom pink, pale rose, lavender blush*/
+  background-size: 400% 400%;
+  animation: sakuraGradientShift 20s ease-in-out infinite;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  scroll-behavior: smooth;
+  color: #36454f; /*charcoal*/
+  text-shadow:
+  -0.5px -0.5px 0 #ffe6ee,
+   0.5px -0.5px 0 #ffe6ee,
+  -0.5px  0.5px 0 #ffe6ee,
+   0.5px  0.5px 0 #ffe6ee;
+  transition: color 0.3s ease;
+}
+
+html.dark body {
+  background: linear-gradient(-45deg, #1e1a1d, #2c1f2e, #3b2637, #4b1e2e); 
+  /*black with plum hints, deep eggplant or mulberry, warm dark rosewood, dark burgundy wine*/
+  background-size: 400% 400%;
+  animation: wineGradientShift 20s ease-in-out infinite;
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  scroll-behavior: smooth;  
+  color: #d4af7f;
+    text-shadow:
+    -0.5px -0.5px 0 #722f37,
+     0.5px -0.5px 0 #722f37,
+    -0.5px  0.5px 0 #722f37,
+     0.5px  0.5px 0 #722f37;
+  transition: color 0.3s ease;
+}
+
+@keyframes sakuraGradientShift {
+  0% {
+    background-position: 50% 75%;
+  }
+  50% {
+    background-position: 100% 75%;
+  }
+  100% {
+    background-position: 50% 75%;
+  }
+}
+
+@keyframes wineGradientShift {
+  0% {
+    background-position: 50% 75%;
+  }
+  50% {
+    background-position: 100% 75%;
+  }
+  100% {
+    background-position: 50% 75%;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+@layer utilities {
+  .text-shadow-outline {
+    text-shadow:
+      -0.5px -0.5px 0 #ffe6ee,
+       0.5px -0.5px 0 #ffe6ee,
+      -0.5px  0.5px 0 #ffe6ee,
+       0.5px  0.5px 0 #ffe6ee;
+    transition: color 0.3s ease;
+  }
+
+  .dark .text-shadow-outline {
+    text-shadow:
+      -0.5px -0.5px 0 #722f37,
+       0.5px -0.5px 0 #722f37,
+      -0.5px  0.5px 0 #722f37,
+       0.5px  0.5px 0 #722f37;
+  }
+}

@@ -1,0 +1,91 @@
+.navbar-title {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 1rem 0 1rem;
+  color: #36454f; /*charcoal*/
+  transition: color 0.3s ease;
+  position: relative;
+  border-radius: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  background: transparent;
+  text-align: center;
+  scroll-behavior: smooth;
+  text-shadow:
+    -0.5px -0.5px 0 #ffe6ee, /*very light pink*/
+     0.5px -0.5px 0 #ffe6ee, /*very light pink*/
+    -0.5px  0.5px 0 #ffe6ee, /*very light pink*/
+     0.5px  0.5px 0 #ffe6ee; /*very light pink*/
+}
+
+.navbar-title:hover {
+  font-weight: 600;
+  background-color: #0000001a; /* 10% black opacity*/
+  color: #881337; /*deep rose red*/
+  text-shadow:
+  -0.5px -0.5px 0 #ffe6ee, /*very light pink*/
+   0.5px -0.5px 0 #ffe6ee, /*very light pink*/
+  -0.5px  0.5px 0 #ffe6ee, /*very light pink*/
+   0.5px  0.5px 0 #ffe6ee; /*very light pink*/
+}
+
+.navbar-links a {
+  color: #36454f; /*charcoal*/
+  padding: 0.25rem 0.5rem;
+  transition: color 0.3s ease;
+  position: relative;
+  border-radius: 1rem;
+}
+
+.navbar-links a:hover {
+  background-color: #0000001a;
+  color: #881337; /*deep rose red*/
+}
+
+.dark .navbar-title {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 1rem 0 1rem;
+  color: #d4af7f; /*classic champagne*/
+  transition: color 0.3s ease;
+  position: relative;
+  border-radius: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  background: transparent;
+  text-align: center;
+  scroll-behavior: smooth;
+  text-shadow:
+    -0.5px -0.5px 0 #722f37, /*deep wine*/
+     0.5px -0.5px 0 #722f37, /*deep wine*/
+    -0.5px  0.5px 0 #722f37, /*deep wine*/
+     0.5px  0.5px 0 #722f37; /*deep wine*/
+}
+
+.dark .navbar-title:hover {
+  font-weight: 600;
+  background-color: #ffffff1a; /* 10% white opacity*/
+  color: #f4dec2; /*light gold champagne*/
+  text-shadow:
+  -0.5px -0.5px 0 #722f37, /*deep wine*/
+   0.5px -0.5px 0 #722f37, /*deep wine*/
+  -0.5px  0.5px 0 #722f37, /*deep wine*/
+   0.5px  0.5px 0 #722f37, /*deep wine*/
+}
+
+.dark .navbar-links a {
+  color: #d4af7f; /*classic champagne*/
+  padding: 0.25rem 0.5rem;
+  transition: color 0.3s ease;
+  position: relative;
+  border-radius: 1rem;
+}
+
+.dark .navbar-links a:hover {
+  background-color: #ffffff1a; /* 10% white opacity*/
+  color: #f4dec2; /*light gold champagne*/
+}
