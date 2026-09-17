@@ -1,9 +1,7 @@
-const Home = () => {
+export default function Home() {
   return (
     <div className="mt-32 text-center px-4 py-1">
-      <h1 className="text-2xl md:text-4xl font-bold mb-2">
-        Aaron Davis
-      </h1>
+      <h1 className="text-2xl md:text-4xl font-bold mb-2">Aaron Davis</h1>
       <h2 className="text-sm md:text-xl font-semibold leading-none">
         Machine Learning Engineer & Full-Stack Developer
       </h2>
@@ -14,22 +12,11 @@ const Home = () => {
         View My Work
       </button>
       <div className="mt-12 flex flex-wrap justify-center gap-6">
-        <div className="flex flex-row">
-          Deep Learning
-        </div>
-        <div className="flex flex-row">
-          Back End
-        </div>
-        <div className="flex flex-row">
-          React TailwindCSS Node.js
-        </div>
-        <div className="flex flex-row">
-          Flutter Swift
-        </div>
+        <div className="flex flex-row">Deep Learning</div>
+        <div className="flex flex-row">Back End</div>
+        <div className="flex flex-row">React TailwindCSS Node.js</div>
+        <div className="flex flex-row">Flutter Swift</div>
       </div>
-
     </div>
   );
-};
-
-export default Home;
+}

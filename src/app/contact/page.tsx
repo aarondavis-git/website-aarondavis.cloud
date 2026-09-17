@@ -1,21 +1,18 @@
+import './contact.css';
 
-const Contact = () => {
+export default function Contact() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-12">
-      
       {/* Top Section */}
       <section className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-rose-700 mb-4">
-          Let's Start a Conversation
+          Let&apos;s Start a Conversation
         </h2>
-        <p className="text-gray-700 dark:text-gray-300">
-          How Can I Help?
-        </p>       
+        <p className="text-gray-700 dark:text-gray-300">How Can I Help?</p>
       </section>
 
       {/* Side-by-side Section */}
       <div className="flex flex-col md:flex-row gap-8 text-center">
-        
         {/* Left Column - Form */}
         <div className="flex-1 text-center">
           <form className="grid grid-cols-1 gap-6">
@@ -58,6 +55,4 @@ const Contact = () => {
       </div>
     </div>
   );
-};
-
-export default Contact;
+}

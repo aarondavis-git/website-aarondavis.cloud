@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-*, *::before, *::after{
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
@@ -16,11 +16,11 @@ body {
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 1rem;
-  background: linear-gradient(-45deg, #ffe4e1, #ffb7c5, #fddde6, #fff0f5); 
+  background: linear-gradient(-45deg, #ffe4e1, #ffb7c5, #fddde6, #fff0f5);
   /* misty rose, cherry blossom pink, pale rose, lavender blush*/
   background-size: 400% 400%;
   animation: sakuraGradientShift 20s ease-in-out infinite;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   text-align: center;
@@ -35,16 +35,16 @@ body {
 }
 
 html.dark body {
-  background: linear-gradient(-45deg, #1e1a1d, #2c1f2e, #3b2637, #4b1e2e); 
+  background: linear-gradient(-45deg, #1e1a1d, #2c1f2e, #3b2637, #4b1e2e);
   /*black with plum hints, deep eggplant or mulberry, warm dark rosewood, dark burgundy wine*/
   background-size: 400% 400%;
   animation: wineGradientShift 20s ease-in-out infinite;
-  
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   text-align: center;
-  scroll-behavior: smooth;  
+  scroll-behavior: smooth;
   color: #d4af7f;
     text-shadow:
     -0.5px -0.5px 0 #722f37,

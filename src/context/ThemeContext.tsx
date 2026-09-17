@@ -1,4 +1,5 @@
-// src/context/ThemeContext.tsx
+'use client';
+
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type ThemeContextType = {
@@ -9,8 +10,12 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  // Initial value is read from the DOM class set by the inline script in
+  // layout.tsx (see ThemeScript), which runs before hydration to avoid a
+  // flash of the wrong theme. Here we just sync React state to match it.
   const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark';
+    if (typeof document === 'undefined') return false;
+    return document.documentElement.classList.contains('dark');
   });
 
   useEffect(() => {

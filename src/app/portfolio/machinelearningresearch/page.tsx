@@ -1,10 +1,12 @@
+'use client';
+
 // Machine Learning Research
 
 import { useEffect, useState, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from "framer-motion"
 import Tag from '../../../components/Tag';
 
-const MachineLearningResearch = () => {
+export default function MachineLearningResearch() {
     const tags = useMemo(() => [
         'Deep Learning',
         'Natural Language Processing',
@@ -38,7 +40,6 @@ const MachineLearningResearch = () => {
     const [filteredTopicTitles, setFilteredTopicTitles] = useState<string[] | null>(null);
     const menuRef = useRef<HTMLDivElement>(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [suggestions, setSuggestions] = useState<string[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -57,11 +58,8 @@ const MachineLearningResearch = () => {
     }, [activeTag, topics]);
 
     // Search
-    useEffect(() => {
-        if (searchTerm.trim() === '') {
-            setSuggestions([]);
-            return
-        }
+    const suggestions = useMemo(() => {
+        if (searchTerm.trim() === '') return [];
         const lowered = searchTerm.toLowerCase();
         const matchingTags = tags.filter(tag =>
             tag.toLowerCase().includes(lowered));
@@ -69,7 +67,7 @@ const MachineLearningResearch = () => {
             .map(t => t.title)
             .filter(title => title.toLowerCase().includes(lowered));
 
-        setSuggestions([...matchingTags, ...matchingTopics]);
+        return [...matchingTags, ...matchingTopics];
     }, [searchTerm, tags, topics]);
 
     // Close dropdown when clicking outside
@@ -81,7 +79,6 @@ const MachineLearningResearch = () => {
 
             ) {
                 setShowSuggestions(false)
-                setSuggestions([]); //reset when clicking outside
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
@@ -191,7 +188,6 @@ const MachineLearningResearch = () => {
                                         }
                                     }
                                     setSearchTerm('');
-                                    setSuggestions([]);
                                     setShowSuggestions(false);
 
                                 }}
@@ -268,6 +264,5 @@ const MachineLearningResearch = () => {
             </div>
         </div>
     )
-};
+}
 
-export default MachineLearningResearch;
