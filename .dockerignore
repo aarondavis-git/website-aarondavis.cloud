@@ -1,0 +1,21 @@
+node_modules
+.next
+.git
+.gitignore
+.vercel
+
+# secrets and local config — never bake these into an image
+.env
+.env.*
+!.env.local.example
+
+# noise
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+__MACOSX
+npm-debug.log*
+Dockerfile
+.dockerignore
+content/.obsidian
+content/.trash

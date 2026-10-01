@@ -1,0 +1,257 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------
+   Type scale — modelled on apple.com: 17px body copy at a 1.47 line
+   height, with headline steps of 21 / 24 / 28 / 32 / 40 / 48 / 56px.
+   Overriding Tailwind's own text-* tokens here means every existing
+   text-sm / text-xl / md:text-4xl class on the site picks up the new
+   sizes automatically, with no component edits.
+   ------------------------------------------------------------------- */
+@theme {
+  --text-xs: 0.875rem;                /* 14px  captions, labels */
+  --text-xs--line-height: 1.4286;
+  --text-sm: 1rem;                    /* 16px  secondary copy */
+  --text-sm--line-height: 1.5;
+  --text-base: 1.0625rem;             /* 17px  body copy */
+  --text-base--line-height: 1.47059;
+  --text-lg: 1.3125rem;               /* 21px */
+  --text-lg--line-height: 1.381;
+  --text-xl: 1.5rem;                  /* 24px */
+  --text-xl--line-height: 1.3333;
+  --text-2xl: 1.75rem;                /* 28px */
+  --text-2xl--line-height: 1.2857;
+  --text-3xl: 2rem;                   /* 32px */
+  --text-3xl--line-height: 1.25;
+  --text-4xl: 2.5rem;                 /* 40px */
+  --text-4xl--line-height: 1.1;
+  --text-5xl: 3rem;                   /* 48px */
+  --text-5xl--line-height: 1.0834;
+  --text-6xl: 4rem;                   /* 64px  hero */
+  --text-6xl--line-height: 1.0625;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* Solid fallback (not the animated gradient) so trackpad/touch overscroll
+     bounce — which reveals canvas area outside body's own box — shows a
+     matching color instead of default white. */
+  background-color: #e0f2fe;
+}
+
+html.dark {
+  background-color: #1e1a1d;
+}
+
+body {
+  position: relative;
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  background-color: #e0f2fe;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.0625rem;   /* 17px — base body size, see type scale above */
+  line-height: 1.47059;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  scroll-behavior: smooth;
+  color: #36454f; /* charcoal */
+  overflow-x: hidden;
+}
+
+html.dark body {
+  background-color: #1e1a1d;
+  color: #d4af7f; /* champagne */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Toggled onto <html> for ~50ms around a dark-mode switch (see
+   ThemeContext.tsx) so every element — including glass panels, whose
+   background/border/box-shadow otherwise fade via the same transition used
+   for their hover states — snaps to the new theme instantly instead of
+   easing into it, while leaving normal hover transitions untouched the
+   rest of the time. */
+.theme-toggle-instant,
+.theme-toggle-instant * {
+  transition: none !important;
+}
+
+/* ---------------------------------------------------------------------
+   Glass utility layer — subtle accents only (nav, cards, panels).
+   Composable with existing Tailwind classes; override bg/border color
+   per-component as needed.
+   ------------------------------------------------------------------- */
+.glass {
+  /* Tinted toward the page's own light-blue background (#e0f2fe) rather
+     than pure white, so the fill reads as translucent glass over that
+     background instead of a plain white panel. */
+  background-color: rgba(224, 242, 254, 0.45);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(54, 69, 79, 0.10);
+  transition: var(--ui-transition);
+}
+
+html.dark .glass {
+  background-color: rgba(30, 26, 29, 0.45);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+/* Hover "pop": cards lift slightly and gain a deeper shadow. Excludes the
+   sidebar, the mobile bottom bar, floating dropdown menus (.absolute), and
+   anything explicitly opted out (.no-pop, e.g. the language/theme toggles),
+   which should stay put. */
+.glass:not(.sidebar, nav, .absolute, .no-pop):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(54, 69, 79, 0.18);
+}
+
+html.dark .glass:not(.sidebar, nav, .absolute, .no-pop):hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass:not(.sidebar, nav, .absolute, .no-pop):hover {
+    transform: none;
+  }
+}
+
+/* Solid variant — for large flat panels (sidebar, portfolio tiles) that
+   need to resist picking up a color cast from the ambient background
+   blobs behind them via backdrop-blur. Same border/shadow as .glass,
+   just less translucent; apply alongside it, e.g. class="glass glass-solid". */
+.glass-solid {
+  background-color: rgba(224, 242, 254, 0.65);
+}
+
+html.dark .glass-solid {
+  background-color: rgba(30, 26, 29, 0.65);
+}
+
+/* ---------------------------------------------------------------------
+   GLOBAL INTERACTION RULE — the single place that defines how anything
+   clickable looks and reacts (sidebar, bottom bar, buttons, cards that
+   are links, tags, form fields, dropdown items, ...). Components should
+   NOT add their own hover:/focus: colours — use a real <a>/<button>/
+   <input>, or role="button"/"option", and this applies automatically.
+
+   Light mode                     Dark mode
+   rest    charcoal  #36454f      champagne        #d4af7f
+   hover   deep rose #881337      light gold       #f4dec2
+           box gets DARKER        box gets LIGHTER
+   click   text bold, box stays   text bold, box stays
+   Whole areas that aren't a single link/button (e.g. a list row holding a
+   link and a button) opt in with class="interactive"; they darken as one
+   piece and keep the clicked state while anything inside has focus.
+   (click = :focus / :active, or aria-current / aria-pressed / .active
+    for "selected" things like the current page or an applied filter)
+
+   The box is an overlay drawn with a background-image gradient, so it
+   sits on top of whatever fill the element already has (glass panels,
+   form fields, transparent rows) instead of replacing it.
+   ------------------------------------------------------------------- */
+@property --ui-overlay {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+
+:root {
+  --glass-border: rgba(224, 242, 254, 0.65); /* same blue as the page (#e0f2fe), semi-transparent */
+  --ui-text-hover: #881337;                /* deep rose red */
+  --ui-box-hover: rgba(0, 0, 0, 0.06);     /* box on hover */
+  --ui-box-active: rgba(0, 0, 0, 0.08);    /* box once clicked / selected */
+  --ui-field-bg: var(--ui-box-hover);      /* resting fill of text fields */
+  --ui-transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease,
+    --ui-overlay 0.3s ease;
+  /* The same two accent colors as --ui-text-hover above, but as fixed
+     constants that don't flip with the mode — used by TopicCard below. */
+  --deep-rose: #881337;
+  --light-gold: #f4dec2;
+  /* The page's own background blue (#e0f2fe), reused as TopicCard's
+     light-mode header text — the card body's light-mode background. */
+  --card-header-blue: #e0f2fe;
+  /* The dark page background (#1e1a1d), reused as TopicCard's dark-mode
+     header text — the card body's dark-mode background. */
+  --card-header-dark: #1e1a1d;
+}
+
+html.dark {
+  --glass-border: rgba(212, 175, 127, 0.15); /* champagne */
+  --ui-text-hover: #f4dec2;                /* light gold champagne */
+  --ui-box-hover: rgba(255, 255, 255, 0.08);
+  --ui-box-active: rgba(255, 255, 255, 0.10);
+}
+
+/* Rest state */
+:where(a, button, input:not([type="hidden"]), textarea, select, summary,
+  [role="button"], [role="option"], .interactive) {
+  --ui-overlay: transparent;
+  background-image: linear-gradient(var(--ui-overlay), var(--ui-overlay));
+  transition: var(--ui-transition);
+}
+
+:where(a[href], button, summary, [role="button"], [role="option"]):not(:disabled) {
+  cursor: pointer;
+}
+
+/* Hover: text -> accent, box darker (light) / lighter (dark) */
+:where(a, button, input:not([type="hidden"]), textarea, select, summary,
+  [role="button"], [role="option"], .interactive):not(:disabled):hover {
+  color: var(--ui-text-hover);
+  --ui-overlay: var(--ui-box-hover);
+}
+
+/* Clicked / selected: text bold, the box stays (one step stronger than
+   hover). Declared after :hover so it keeps winning while hovered. */
+:where(a, button, input:not([type="hidden"]), textarea, select, summary,
+  [role="button"], [role="option"], .interactive):not(:disabled):is(
+    :focus, :active, .active, .interactive:focus-within,
+    [aria-current="page"], [aria-pressed="true"], [aria-selected="true"]
+  ) {
+  color: var(--ui-text-hover);
+  font-weight: 600;
+  --ui-overlay: var(--ui-box-active);
+}
+
+/* Form fields: rest fill is the same tint the sidebar shows on hover
+   (instead of white). The focus state above replaces the old ring. */
+:where(input:not([type="hidden"]), textarea, select) {
+  background-color: var(--ui-field-bg);
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+:where(input, textarea)::placeholder {
+  color: currentColor;
+  opacity: 0.55;
+}
+
+/* Long-form notes (TopicPage): the typography plugin's .prose defaults to
+   16px / 1.75 — bring it to the same 17px / 1.47 as the rest of the site.
+   Headings inside .prose scale from this via em. */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}

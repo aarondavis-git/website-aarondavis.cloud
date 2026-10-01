@@ -1,0 +1,21 @@
+/* Floating panel: inset from the viewport edges with rounded corners so it
+   reads as a card resting on the page background, like the content cards.
+   Background, border color and shadow come from .glass / .glass-solid
+   (shared, see globals.css) — the full border is left as .glass defines it. */
+.sidebar {
+  box-shadow: 0 12px 40px rgba(54, 69, 79, 0.16);
+}
+
+html.dark .sidebar {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* .glass (globals.css) sets its own `transition` shorthand for the hover
+   color/shadow effect, which doesn't include `width` — and since it's a
+   plain class selector at equal specificity to Tailwind's `transition-all`,
+   it wins the cascade and silently drops the width transition, so the rail
+   used to just snap between collapsed/expanded instead of animating.
+   `.sidebar.glass` outranks `.glass` alone, so this is what actually wins. */
+.sidebar.glass {
+  transition: width 320ms cubic-bezier(0.4, 0, 0.2, 1), var(--ui-transition);
+}
