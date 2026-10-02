@@ -35,7 +35,6 @@ RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/content ./content
 
 USER nextjs
@@ -44,6 +43,6 @@ EXPOSE 3000
 # Runtime secrets (DATABASE_URL, LOG_LEVEL) are passed with `docker run -e`
 # or --env-file — never baked into the image.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-  CMD wget -q --spider http://127.0.0.1:3000/ || exit 1
+    CMD wget -q --spider http://127.0.0.1:3000/ || exit 1
 
 CMD ["node", "server.js"]
